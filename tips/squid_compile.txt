@@ -1,0 +1,3 @@
+apt-get install gcc build-essential libssl-dev
+./configure --enable-ssl --enable-icap-client --enable-ssl-crtd --with-large-files
+make install clean -j20

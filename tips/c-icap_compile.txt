@@ -1,0 +1,2 @@
+./configure --enable-ipv6 --enable-large-files --enable-lib-compat --prefix=/usr/local/c-icap
+make install clean -j20
