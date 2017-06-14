@@ -11,7 +11,7 @@ TARGET = libc-icap-xss.so
 LIBS =
 SRCDIR = .
 SRCS = $(shell find $(SRCDIR) -name "*.cpp")
-INCS = $(shell find $(SRCDIR) -name "*.h")
+#INCS = $(shell find $(SRCDIR) -name "*.h")
 OBJS = $(SRCS:.cpp=.o)
 
 .PHONY: all
