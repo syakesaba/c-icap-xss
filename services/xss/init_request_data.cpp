@@ -31,8 +31,7 @@
 
 /*
  * ICAPリクエストが到着する度に呼び出される。
- * ここでPythonクラスをインスタンスに変え、
- * 一つのICAPトランザクションで共有する。
+ * 一つのICAPトランザクションで共有するインスタンスを作成する。
  */
 void *cix_init_request_data(ci_request_t *req) {
     cix_debug_printf(CIX_INFO_LEVEL,"starts");
