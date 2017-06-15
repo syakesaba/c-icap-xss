@@ -4,7 +4,7 @@ dot -Tjpg flow.dot -o flow.jpg
 */
 
 digraph Diagram {
-    PROFILE [label = "c-icap-xss", shape=none];
+    //PROFILE [label = "c-icap-xss", shape=none];
     nodesep=0.1;
     //デフォルトノード
     node [fontsize=10];
@@ -15,7 +15,7 @@ digraph Diagram {
     SERVICE_INIT -> init_service [label="SERVICE INITIALIZATION"];
 
     ICAP_REQUEST_COME [shape=doublecircle];
-    ICAP_REQUEST_COME -> init_request_data [label="ICAP Request has come, creating instance"];
+    ICAP_REQUEST_COME -> init_request_data [label="ICAP Request has come!"];
     subgraph clusterRunFlow {
         init_request_data -> check_preview_handler [label="Analyzing PreviewData"];
         check_preview_handler -> service_io [label="Finished Analyzing PreviewData"];
