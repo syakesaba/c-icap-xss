@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "c_icap/c-icap.h"
+#include <c_icap/c-icap.h>
 #include <c_icap/service.h>
 
 #include "init_service.h"

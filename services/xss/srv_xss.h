@@ -20,7 +20,7 @@
 #ifndef SRV_XSS_H_
 #define SRV_XSS_H_
 
-#include "c_icap/c-icap.h"
+#include <c_icap/c-icap.h>
 
 CI_DECLARE_MOD_DATA ci_service_module_t service;
 
