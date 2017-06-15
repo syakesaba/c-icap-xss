@@ -4,30 +4,33 @@ dot -Tjpg flow.dot -o flow.jpg
 */
 
 digraph Diagram {
-    PROFILE [label = "c-icap-xssのフロー", shape=none];
+    PROFILE [label = "c-icap-xss", shape=none];
     nodesep=0.1;
     //デフォルトノード
     node [fontsize=10];
     //デフォルトエッジ
     edge [fontsize=9];
 
-    ICAP_REQUEST_COME [shape=doublecircle]
-    ICAP_REQUEST_COME -> init_request_data [label="ICAPリクエスト到着、インスタンス作成"]
+    SERVICE_INIT [shape=doublecircle, label="SERVICE_INIT"];
+    SERVICE_INIT -> clusterRunFlow [label="SERVICE INITIALIZATION"];
+
+    ICAP_REQUEST_COME [shape=doublecircle];
+    ICAP_REQUEST_COME -> init_request_data [label="ICAP Request has come, creating instance"];
     subgraph clusterRunFlow {
-        init_request_data -> check_preview_handler [label="ヘッダ解析完了"];
-        check_preview_handler -> service_io [label="先行データ解析完了、解析続行"];
-        check_preview_handler -> release_request_data [label="先行データの時点で処理終了"];
-        service_io -> service_io [label="データ解析"];
-        service_io -> release_request_data [label="データ解析の途中で処理終了"];
-        service_io -> end_of_data [label="データ解析完了"];
-        end_of_data -> release_request_data [label="インスタンス削除"];
-        release_request_data -> init_request_data [label="ICAPリクエスト処理完了"];
+        init_request_data -> check_preview_handler [label="Analyzing PreviewData"];
+        check_preview_handler -> service_io [label="Finished Analyzing PreviewData"];
+        check_preview_handler -> release_request_data [label="Ends up parse Data"];
+        service_io -> service_io [label="Parse Data"];
+        service_io -> release_request_data [label="Ends up parse Data"];
+        service_io -> end_of_data [label="No Data left"];
+        end_of_data -> release_request_data [label="destroying instance"];
+        release_request_data -> init_request_data [label="Ends up parsing ICAP request"];
     }
 
-    SIGTERM [shape=doublecircle, label="TEMRINATE"]
+    SIGTERM [shape=doublecircle, label="TEMRINATE"];
 
     subgraph HaltFlow {
-        SIGTERM -> close_service [label=""];
+        SIGTERM -> close_service [label="closing service"];
     }
-    { rank=same; ICAP_REQUEST_COME SIGTERM } //配置を一緒の階層にする
+    { rank=same; SERVICE_INIT ICAP_REQUEST_COME SIGTERM }
 }
