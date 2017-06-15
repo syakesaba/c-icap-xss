@@ -24,7 +24,7 @@ digraph Diagram {
         service_io -> release_request_data [label="Ends up parse Data"];
         service_io -> end_of_data [label="No Data left"];
         end_of_data -> release_request_data [label="destroying instance"];
-        release_request_data -> init_request_data [label="Ends up parsing ICAP request"];
+        release_request_data;
     }
 
     SIGTERM [shape=doublecircle, label="TEMRINATE"];
